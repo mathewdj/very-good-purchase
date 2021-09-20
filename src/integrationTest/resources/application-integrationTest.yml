@@ -1,0 +1,5 @@
+# See docker-compose.yml
+spring.data.mongodb.host: localhost
+spring.data.mongodb.database: very_good_purchase_db
+spring.data.mongodb.username: PurchaseUser
+spring.data.mongodb.password: Test1234

@@ -13,14 +13,37 @@ repositories {
 	mavenCentral()
 }
 
+def integrationTest = sourceSets.create('integrationTest')
+
+configurations[integrationTest.implementationConfigurationName].extendsFrom(configurations.testImplementation)
+configurations[integrationTest.runtimeOnlyConfigurationName].extendsFrom(configurations.testRuntimeOnly)
+
+def integrationTestTask = tasks.register('integrationTest', Test) {
+	description = 'Runs integration tests.'
+	group = 'verification'
+	useJUnitPlatform()
+
+	testClassesDirs = integrationTest.output.classesDirs
+	classpath = configurations[integrationTest.runtimeClasspathConfigurationName] + integrationTest.output
+
+	shouldRunAfter(tasks.named('test'))
+}
+
+tasks.named('check') {
+	dependsOn(integrationTestTask)
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.assertj:assertj-core:3.11.1'
+
+	integrationTestImplementation project
 }
 
-test {
+tasks.named('test') {
 	useJUnitPlatform()
 }
 
