@@ -12,4 +12,10 @@ public class IntegrationTestData {
                 LocalDate.of(2017, 1, 1),
                 PurchaseType.Book, BigDecimal.TEN);
     }
+
+    public static Purchase ps4Purchase() {
+        return new Purchase("Normand Salazar",
+                LocalDate.of(2021, 9, 20),
+                PurchaseType.PS4, BigDecimal.ONE);
+    }
 }
