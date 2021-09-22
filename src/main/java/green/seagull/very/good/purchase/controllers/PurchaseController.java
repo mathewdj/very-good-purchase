@@ -3,11 +3,9 @@ package green.seagull.very.good.purchase.controllers;
 import green.seagull.very.good.purchase.domain.Purchase;
 import green.seagull.very.good.purchase.repository.PurchaseCrudRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -23,8 +21,9 @@ public class PurchaseController {
         return purchaseCrudRepository.findAll();
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public @ResponseBody Mono<Purchase> save(Purchase purchase) {
+    public @ResponseBody Mono<Purchase> save(@RequestBody Purchase purchase) {
         return purchaseCrudRepository.save(purchase);
     }
 }

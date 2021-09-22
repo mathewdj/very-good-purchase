@@ -51,7 +51,13 @@ class PurchaseRouterTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .bodyValue(ps4Purchase())
                 .exchange()
-                .expectStatus().isOk()
+                .expectStatus().isCreated()
                 .expectBody(Purchase.class).value(purchase -> assertThat(purchase.getId()).isNotNull());
+
+        var purchase = purchaseCrudRepository.findAll().toStream().findFirst().orElseThrow();
+        assertThat(purchase)
+                .usingRecursiveComparison()
+                .ignoringFields("id")
+                .isEqualTo(ps4Purchase());
     }
 }
