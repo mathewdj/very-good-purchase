@@ -1,1 +1,4 @@
-
+spring.data.mongodb.host: ${SECRETS_DB_HOST:localhost}
+spring.data.mongodb.database: ${SECRETS_DB_NAME:very_good_purchase_db}
+spring.data.mongodb.username: ${SECRETS_DB_USERNAME:PurchaseUser}
+spring.data.mongodb.password: ${SECRETS_DB_PASSWORD:Test1234}
