@@ -10,21 +10,24 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Controller
-@CrossOrigin
-@RequestMapping(path = "/api/purchases")
 public class PurchaseController {
-    
+
     @Autowired
     private PurchaseService purchaseService;
 
-    @GetMapping()
+    @GetMapping(path = "/api/purchases")
     public @ResponseBody Flux<Purchase> getAllPurchases() {
         return purchaseService.findAll();
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
+    @PostMapping(path = "/api/purchases")
     public @ResponseBody Mono<Purchase> save(@RequestBody Purchase purchase) {
         return purchaseService.save(purchase);
+    }
+
+    @DeleteMapping(path = "/api/purchases/{purchaseId}")
+    public @ResponseBody Mono<Void> delete(@PathVariable String purchaseId) {
+        return purchaseService.delete(purchaseId);
     }
 }

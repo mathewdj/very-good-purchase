@@ -25,4 +25,9 @@ public class PurchaseService {
     public Flux<Purchase> findAll() {
         return purchaseCrudRepository.findAll();
     }
+
+    public Mono<Void> delete(String purchaseId) {
+        log.info("Deleting purchaseId: " + purchaseId);
+        return purchaseCrudRepository.deleteById(purchaseId);
+    }
 }
