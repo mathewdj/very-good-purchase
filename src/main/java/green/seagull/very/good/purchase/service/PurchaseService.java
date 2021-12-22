@@ -1,6 +1,5 @@
 package green.seagull.very.good.purchase.service;
 
-import green.seagull.very.good.purchase.controllers.PurchaseController;
 import green.seagull.very.good.purchase.domain.Purchase;
 import green.seagull.very.good.purchase.repository.PurchaseCrudRepository;
 import org.slf4j.Logger;
@@ -12,7 +11,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class PurchaseService {
-    private Logger log = LoggerFactory.getLogger(PurchaseController.class);
+    private Logger log = LoggerFactory.getLogger(PurchaseService.class);
 
     @Autowired
     private PurchaseCrudRepository purchaseCrudRepository;
