@@ -18,6 +18,10 @@ class PurchasesController {
     @ResponseBody
     fun findAll(): Flux<Purchase> = purchaseService.findAll()
 
+    @GetMapping("/api/purchases/{purchaseId}")
+    @ResponseBody
+    fun findById(@PathVariable purchaseId: String) = purchaseService.findById(purchaseId)
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/api/purchases")
     fun save(@RequestBody purchase: Purchase) = purchaseService.save(purchase)

@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Primary
 import org.springframework.http.MediaType
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.reactive.server.WebTestClient
+import org.springframework.test.web.reactive.server.expectBody
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
@@ -33,7 +34,7 @@ class PurchaseControllerTest {
     private lateinit var mockPurchaseService: PurchaseService
 
     @Test
-    fun `GET purchases endpoint returns 200`() {
+    fun `GET purchases list endpoint returns 200`() {
         given(mockPurchaseService.findAll()).willReturn(Flux.just(samplePurchase()))
 
         webTestClient.get().uri(URL)
@@ -50,7 +51,19 @@ class PurchaseControllerTest {
     }
 
     @Test
-    fun `POST purchases endpoint returns 201`() {
+    fun `should GET single purchase by id`() {
+        given(mockPurchaseService.findById("1")).willReturn((Mono.just(samplePurchase())))
+
+        webTestClient.get().uri("$URL/1")
+            .accept(MediaType.APPLICATION_JSON)
+            .exchange()
+            .expectStatus().isOk
+            .expectBody<Purchase>()
+            .isEqualTo(samplePurchase())
+    }
+
+    @Test
+    fun `should POST purchase to create a new purchase`() {
         webTestClient.post().uri(URL)
             .accept(MediaType.APPLICATION_JSON)
             .body(Mono.just(samplePurchase()), Purchase::class.java)
@@ -61,7 +74,7 @@ class PurchaseControllerTest {
     }
 
     @Test
-    fun `DELETE purchase returns 200`() {
+    fun `should DELETE purchase to delete a purchase`() {
         webTestClient.delete().uri("$URL/1")
             .accept(MediaType.APPLICATION_JSON)
             .exchange()

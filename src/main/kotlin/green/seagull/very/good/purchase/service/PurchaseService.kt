@@ -21,6 +21,8 @@ open class PurchaseService {
 
     open fun findAll(): Flux<Purchase> = purchaseCrudRepository.findAll()
 
+    open fun findById(id: String) = purchaseCrudRepository.findById(id)
+
     open fun delete(purchaseId: String): Mono<Void> {
         log.info("Deleting purchaseId: $purchaseId")
         return purchaseCrudRepository.deleteById(purchaseId)

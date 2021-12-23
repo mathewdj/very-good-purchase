@@ -7,6 +7,7 @@ import java.time.LocalDate
 
 object TestDataModel {
     fun samplePurchase() = Purchase(
+        null,
         "Oathbringer",
         LocalDate.parse("2021-10-10"),
         PurchaseType.Book,
