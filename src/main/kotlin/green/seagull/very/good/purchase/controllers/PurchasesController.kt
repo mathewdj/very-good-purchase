@@ -27,6 +27,11 @@ class PurchasesController {
     @ResponseBody
     fun save(@RequestBody purchase: Purchase) = purchaseService.save(purchase)
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping("/api/purchases")
+    @ResponseBody
+    fun update(@RequestBody purchase: Purchase) = purchaseService.update(purchase)
+
     @DeleteMapping("/api/purchases/{purchaseId}")
     @ResponseBody
     fun delete(@PathVariable purchaseId: String) = purchaseService.delete(purchaseId)

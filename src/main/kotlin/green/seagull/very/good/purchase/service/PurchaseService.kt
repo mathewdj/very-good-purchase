@@ -19,6 +19,11 @@ open class PurchaseService {
         return purchaseCrudRepository.save(purchase)
     }
 
+    open fun update(purchase: Purchase): Mono<Purchase> {
+        log.info("Updating purchase: $purchase")
+        return purchaseCrudRepository.save(purchase)
+    }
+
     open fun findAll(): Flux<Purchase> = purchaseCrudRepository.findAll()
 
     open fun findById(id: String) = purchaseCrudRepository.findById(id)

@@ -74,6 +74,17 @@ class PurchaseControllerTest {
     }
 
     @Test
+    fun `should PUT to update an existing purchase`() {
+        webTestClient.put().uri(URL)
+            .accept(MediaType.APPLICATION_JSON)
+            .body(Mono.just(samplePurchase()), Purchase::class.java)
+            .exchange()
+            .expectStatus().isCreated
+
+        verify(mockPurchaseService).update(samplePurchase())
+    }
+
+    @Test
     fun `should DELETE purchase to delete a purchase`() {
         webTestClient.delete().uri("$URL/1")
             .accept(MediaType.APPLICATION_JSON)
