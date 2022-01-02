@@ -23,6 +23,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
 
+	implementation("com.squareup.moshi:moshi-kotlin:1.12.0") // Required by org.openapi.generator
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.assertj:assertj-core:3.21.0")

@@ -1,5 +1,6 @@
 package green.seagull.very.good.purchase.domain
 
+import green.seagull.very.good.purchase.model.PurchaseType
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.math.BigDecimal
