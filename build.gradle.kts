@@ -6,6 +6,7 @@ plugins {
 	id("java")
 	id("org.jetbrains.kotlin.jvm") version "1.6.10"
 	id("com.google.cloud.tools.jib") version "3.1.4"
+	id( "org.openapi.generator") version "5.3.0"
 }
 
 group = "green.seagull"
@@ -55,4 +56,26 @@ jib {
 	container {
 		ports = listOf("8080")
 	}
+}
+
+sourceSets.main {
+	java.srcDirs("build/generated/src/main/kotlin")
+}
+
+openApiValidate {
+	inputSpec.set("$rootDir/src/main/resources/schema/purchase-api.yml")
+	recommend.set(true)
+}
+
+openApiGenerate {
+	generatorName.set("kotlin")
+	inputSpec.set("$rootDir/src/main/resources/schema/purchase-api.yml")
+	outputDir.set("$buildDir/generated")
+	modelPackage.set("green.seagull.very.good.purchase.model")
+	modelFilesConstrainedTo.set(listOf("Purchase", "PurchaseType"))
+	configOptions.set(mapOf("dateLibrary" to "java8"))
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+	dependsOn("openApiGenerate")
 }
