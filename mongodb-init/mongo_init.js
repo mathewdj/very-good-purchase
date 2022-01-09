@@ -13,4 +13,4 @@ db.createUser(
             }
 );
 
-db.createCollection('purchase_collection');
+db.createCollection('purchase');

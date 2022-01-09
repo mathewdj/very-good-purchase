@@ -16,6 +16,27 @@ repositories {
 	mavenCentral()
 }
 
+
+val integrationTest: SourceSet by sourceSets.creating
+
+configurations[integrationTest.implementationConfigurationName].extendsFrom(configurations.testImplementation.get())
+configurations[integrationTest.runtimeOnlyConfigurationName].extendsFrom(configurations.testRuntimeOnly.get())
+
+val integrationTestTask = tasks.register<Test>("integrationTest") {
+	description = "Runs integration tests."
+	group = "verification"
+	useJUnitPlatform()
+
+	testLogging {
+		events = mutableSetOf(PASSED, SKIPPED, FAILED)
+	}
+
+	testClassesDirs = integrationTest.output.classesDirs
+	classpath = configurations[integrationTest.runtimeClasspathConfigurationName] + integrationTest.output
+
+	shouldRunAfter(tasks.test)
+}
+
 dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -31,6 +52,7 @@ dependencies {
 	testImplementation("org.mockito:mockito-core:4.1.0")
 	testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
 
+	"integrationTestImplementation"(project)
 }
 
 tasks.named<Test>("test") {
