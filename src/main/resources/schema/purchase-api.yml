@@ -51,7 +51,7 @@ components:
       enum:
         - Book
         - Tool
-        - PS4
+        - Ps4
         - Switch
         - Steam
         - Collection
