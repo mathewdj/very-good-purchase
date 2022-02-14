@@ -16,7 +16,7 @@ class PurchasesController {
 
     @GetMapping("/api/purchases")
     @ResponseBody
-    fun findAll(): Flux<Purchase> = purchaseService.findAll()
+    fun findAll(): Flux<Purchase> = purchaseService.findAllSortDateDesc()
 
     @GetMapping("/api/purchases/{purchaseId}")
     @ResponseBody

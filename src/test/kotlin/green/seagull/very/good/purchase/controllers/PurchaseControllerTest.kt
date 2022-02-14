@@ -35,7 +35,7 @@ class PurchaseControllerTest {
 
     @Test
     fun `GET purchases list endpoint returns 200`() {
-        given(mockPurchaseService.findAll()).willReturn(Flux.just(samplePurchase()))
+        given(mockPurchaseService.findAllSortDateDesc()).willReturn(Flux.just(samplePurchase()))
 
         webTestClient.get().uri(URL)
             .accept(MediaType.APPLICATION_JSON)

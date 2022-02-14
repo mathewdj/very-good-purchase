@@ -26,6 +26,10 @@ open class PurchaseService {
 
     open fun findAll(): Flux<Purchase> = purchaseCrudRepository.findAll()
 
+    open fun findAllSortDateDesc(): Flux<Purchase> =
+        findAll()
+        .sort { p1, p2 -> p2.date.compareTo(p1.date) }
+
     open fun findById(id: String) = purchaseCrudRepository.findById(id)
 
     open fun delete(purchaseId: String): Mono<Void> {
