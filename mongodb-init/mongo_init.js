@@ -14,3 +14,6 @@ db.createUser(
 );
 
 db.createCollection('purchase');
+
+// Desc index
+db.purchase.createIndex({'date':-1})
