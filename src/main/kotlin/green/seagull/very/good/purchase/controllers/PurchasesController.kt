@@ -18,6 +18,10 @@ class PurchasesController {
     @ResponseBody
     fun findAll(): Flux<Purchase> = purchaseService.findAllSortDateDesc()
 
+    @GetMapping("/api/purchases/tsv")
+    @ResponseBody
+    fun tsv(): Flux<String> = purchaseService.tsv()
+
     @GetMapping("/api/purchases/{purchaseId}")
     @ResponseBody
     fun findById(@PathVariable purchaseId: String) = purchaseService.findById(purchaseId)

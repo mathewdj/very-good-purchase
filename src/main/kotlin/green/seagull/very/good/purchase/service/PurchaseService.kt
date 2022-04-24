@@ -26,6 +26,20 @@ open class PurchaseService {
 
     open fun findAll(): Flux<Purchase> = purchaseCrudRepository.findAll()
 
+    open fun tsv(): Flux<String> {
+        return findAllSortDateDesc()
+            .map {
+                val date = with (it.date) {
+                    val monthZeroPadded = monthValue.toString().padStart(2, '0')
+                    val dayOfMonthZeroPadded = dayOfMonth.toString().padStart(2, '0')
+                    "$year-$monthZeroPadded-$dayOfMonthZeroPadded"
+                }
+                with (it) {
+                    "$date\t${amountDollars}\t${name}\t${purchaseType.toString().lowercase()}\n"
+                }
+            }
+    }
+
     open fun findAllSortDateDesc(): Flux<Purchase> =
         findAll()
         .sort { p1, p2 -> p2.date.compareTo(p1.date) }
