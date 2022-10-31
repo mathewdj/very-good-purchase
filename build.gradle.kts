@@ -5,7 +5,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
 	id("java")
 	id("org.jetbrains.kotlin.jvm") version "1.6.10"
-	id("com.google.cloud.tools.jib") version "3.1.4"
+	id("com.google.cloud.tools.jib") version "3.3.1"
 	id( "org.openapi.generator") version "5.3.0"
 }
 
