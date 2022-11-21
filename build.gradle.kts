@@ -49,7 +49,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
 	testImplementation("org.assertj:assertj-core:3.21.0")
-	testImplementation("org.mockito:mockito-core:4.1.0")
+	testImplementation("org.mockito:mockito-core:4.9.0")
 	testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
 
 	"integrationTestImplementation"(project)
